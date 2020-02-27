@@ -26,7 +26,7 @@ export class ArrayCoreProcessor<T> {
      * @param key - Key as string in object model.
      * @param value - Value Object to compare.
      */
-    public filterByKeyValue(key: string, value: object, filterType?: Filter): this {
+    public filterByKeyValue(key: string, value: Object, filterType?: Filter): this {
         switch (filterType) {
             case Filter.Contains:
                 this.curData = this.actualArray.filter(e => e[key].indexOf(value) !== -1);
