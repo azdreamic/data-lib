@@ -1,0 +1,30 @@
+{
+  "name": "data-lib",
+  "version": "1.0.0",
+  "description": "Data library for JavaScript, TypeScript to process Array and JSON data",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SridharSathaSivam/data-lib.git"
+  },
+  "keywords": [
+    "typescript",
+    "javascript",
+    "data",
+    "array",
+    "processor"
+  ],
+  "author": "Sridhar S",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SridharSathaSivam/data-lib/issues"
+  },
+  "homepage": "https://github.com/SridharSathaSivam/data-lib#readme",
+  "devDependencies": {
+    "typescript": "^3.8.2"
+  }
+}
