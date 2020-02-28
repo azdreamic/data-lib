@@ -12,4 +12,4 @@ jobs:
     - name: Install node module
       run: npm install
     - name: Building Application
-      run: npm run test
+      run: npm run build
