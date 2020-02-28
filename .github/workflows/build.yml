@@ -16,7 +16,7 @@ jobs:
     - name: Building...
       run: npm run build
     - name: Packing...
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v1
       with: 
         name: data-lib
         path: dist/**
