@@ -9,7 +9,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install node module
+    - name: Instaling node_modules...
       run: npm install
-    - name: Building Application
+    - name: Excuting Test...
       run: npm run build
+    - name: Building...
+      run: npm run build
+    - name: Packing...
+      uses: actions/upload-artifact@v2
+      with: 
+        name: data-lib
+        path: dist/**
