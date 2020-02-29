@@ -11,7 +11,7 @@ config.copyFilesForPack.forEach((e, i) => {
             if (fs.existsSync(v) && fs.lstatSync(v).isDirectory() !== true) {
                 const des = v.split('/').slice(1).join('/');
                 const curPath = path.resolve('output/' + des);
-                console.log('Copying File from ' + v + ' to > ' + des)
+                console.log('Copying File from ' + v + ' to > ' + curPath)
                 ensureDirectoryExistence(curPath);
                 fs.copyFileSync(v, 'output/' + des);
             }
@@ -28,7 +28,7 @@ exec('npm pack ./output', () => {
         fs.mkdirSync('./package');
         console.log('package folder created!')
     }
-    if (!fs.existsSync('./package')) {
+    if (fs.existsSync(pkgPath)) {
         fs.copyFileSync(pkgPath, './package/' + fileName);
         console.log('------------------------------------------------------------')
         console.log('Your package is created!' + fileName + '.tgz')
