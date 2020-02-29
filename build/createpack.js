@@ -24,8 +24,8 @@ const version = pkgJSON.version;
 exec('npm pack ./output');
 const fileName = `${pkgJSON.name}-${pkgJSON.version}.tgz`;
 const pkgPath = path.resolve('./' + fileName);
-if (!fs.existsSync('package')) {
-    fs.mkdirSync('package');
+if (!fs.existsSync('./package')) {
+    fs.mkdirSync('./package');
 }
 fs.copyFileSync(pkgPath, './package/' + fileName + '.tgz');
 
