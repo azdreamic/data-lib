@@ -26,8 +26,11 @@ const fileName = `${pkgJSON.name}-${pkgJSON.version}.tgz`;
 const pkgPath = path.resolve('./' + fileName);
 if (!fs.existsSync('./package')) {
     fs.mkdirSync('./package');
+    console.log('package folder created!')
 }
-fs.copyFileSync(pkgPath, './package/' + fileName + '.tgz');
+if (!fs.existsSync('./package')) {
+    fs.copyFileSync(pkgPath, './package/' + fileName);
+}
 
 console.log('------------------------------------------------------------')
 console.log('Your package is created!' + fileName + '.tgz')
