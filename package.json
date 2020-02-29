@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "test": "jest"
+    "test": "jest",
+    "create-pack":"node ./build/createpack.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/SridharSathaSivam/data-lib#readme",
   "devDependencies": {
     "@types/jest": "^25.1.3",
+    "glob": "^7.1.6",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.2"
