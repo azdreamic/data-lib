@@ -20,5 +20,5 @@ jobs:
     - name: Artifacting...
       uses: actions/upload-artifact@v1
       with: 
-        name: data-lib
+        name: package
         path: ./package
