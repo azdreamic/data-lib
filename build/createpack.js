@@ -21,19 +21,21 @@ config.copyFilesForPack.forEach((e, i) => {
 
 const version = pkgJSON.version;
 // exec('cd ./output')
-exec('npm pack ./output');
-const fileName = `${pkgJSON.name}-${pkgJSON.version}.tgz`;
-const pkgPath = path.resolve('./' + fileName);
-if (!fs.existsSync('./package')) {
-    fs.mkdirSync('./package');
-    console.log('package folder created!')
-}
-if (!fs.existsSync('./package')) {
-    fs.copyFileSync(pkgPath, './package/' + fileName);
-}
+exec('npm pack ./output', () => {
+    const fileName = `${pkgJSON.name}-${pkgJSON.version}.tgz`;
+    const pkgPath = path.resolve('./' + fileName);
+    if (!fs.existsSync('./package')) {
+        fs.mkdirSync('./package');
+        console.log('package folder created!')
+    }
+    if (!fs.existsSync('./package')) {
+        fs.copyFileSync(pkgPath, './package/' + fileName);
+        console.log('------------------------------------------------------------')
+        console.log('Your package is created!' + fileName + '.tgz')
+    }
+});
 
-console.log('------------------------------------------------------------')
-console.log('Your package is created!' + fileName + '.tgz')
+
 
 // exec('cd ..')
 
