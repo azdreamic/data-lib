@@ -27,4 +27,4 @@ jobs:
 
     - name: Publishing...
       run: |
-        npm run publish
+        npm run publish-file

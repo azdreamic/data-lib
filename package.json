@@ -7,7 +7,7 @@
     "build": "tsc --project tsconfig.json",
     "test": "jest",
     "create-pack":"node ./build/createpack.js",
-    "publish":"node ./build/publish.js"
+    "publish-file":"node ./build/publish.js"
   },
   "repository": {
     "type": "git",
