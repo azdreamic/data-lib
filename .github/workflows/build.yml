@@ -9,11 +9,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@freedev' # Defaults to the user or organization that owns the workflow file 
     
     - name: Instaling node_modules...
       run: npm install
@@ -30,6 +25,8 @@ jobs:
         name: package
         path: ./package
     - name: Publishing...
-      run: npm publish
+      run: |
+        npm login --registry=https://npm.pkg.github.com --scope=@SridharSathaSivam
+        npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
