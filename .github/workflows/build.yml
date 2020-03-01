@@ -9,11 +9,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      
     - name: 'npm/registry setup'
-        uses: actions/setup-node@v1
-        with:
+      uses: actions/setup-node@v1
+      with:
           registry-url: https://npm.pkg.github.com/
-        env:
+      env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
     - name: Instaling node_modules...
