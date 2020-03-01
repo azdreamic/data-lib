@@ -14,7 +14,7 @@ jobs:
     - name: Excuting Test...
       run: npm run test
     - name: Building...
-      run: npm run buil
+      run: npm run build
     - name: Packing...
       run: npm run create-pack
     - name: Artifacting...
@@ -25,6 +25,6 @@ jobs:
     - name: Publishing...
       run: |
         echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
-        npm publish
+        npm publish './package/data-lib-1.0.0.tgz'
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
