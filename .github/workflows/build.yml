@@ -32,9 +32,9 @@ jobs:
         name: package
         path: ./package
     - name: Publishing...
-      run: |
-        npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
-        npm publish "package/data-lib-1.0.0.tgz"
+     # run: |
+     #   npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+     #  npm publish "package/data-lib-1.0.0.tgz"
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
