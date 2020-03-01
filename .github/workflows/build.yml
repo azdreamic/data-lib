@@ -1,22 +1,16 @@
 name: TypeScript Build
-
 on: [push]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: SridharSathaSivam/checkout
-    
     - name: Instaling node_modules...
       run: npm install
     - name: Excuting Test...
       run: npm run test
     - name: Building...
       run: npm run build
-
     - name: Packing...
       run: npm run create-pack
     - name: Artifacting...
@@ -24,7 +18,6 @@ jobs:
       with: 
         name: package
         path: ./package
-
     - name: Publishing...
       run: |
         npm run publish-file
