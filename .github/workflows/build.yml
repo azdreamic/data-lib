@@ -24,7 +24,7 @@ jobs:
         path: ./package
     - name: Publishing...
       run: |
-        npm login --registry=https://npm.pkg.github.com/
-        npm publish ./package/data-lib-1.0.0.tgz
+        echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+        npm publish-file
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
