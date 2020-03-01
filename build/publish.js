@@ -1,5 +1,6 @@
 const fs = require('fs');
 
-const file = fs.readFileSync('.npmrc');
+var myArgs = process.argv.slice(2);
 
-console.log(file.toString());
+fs.writeFileSync('.npmrc','//npm.pkg.github.com/:_authToken='+myArgs[0]);
+
