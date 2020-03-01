@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: SridharSathaSivam/checkout@v2
+    - uses: SridharSathaSivam/checkout
     
     - name: Instaling node_modules...
       run: npm install
@@ -28,5 +28,3 @@ jobs:
     - name: Publishing...
       run: |
         npm run publish
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
