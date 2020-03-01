@@ -1,10 +1,14 @@
 name: TypeScript Build
+
 on: [push]
+
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: action/checkout@v2
+    - uses: actions/checkout@v2
     - name: Instaling node_modules...
       run: npm install
     - name: Excuting Test...
