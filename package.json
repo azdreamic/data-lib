@@ -13,6 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/SridharSathaSivam/data-lib.git"
   },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "keywords": [
     "typescript",
     "javascript",
