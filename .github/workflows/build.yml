@@ -9,12 +9,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: 'npm/registry setup'
+        uses: actions/setup-node@v1
+        with:
+          registry-url: https://npm.pkg.github.com/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
     - name: Instaling node_modules...
       run: npm install
     - name: Excuting Test...
       run: npm run test
     - name: Building...
       run: npm run build
+
     - name: Packing...
       run: npm run create-pack
     - name: Artifacting...
@@ -22,12 +30,10 @@ jobs:
       with: 
         name: package
         path: ./package
-    - name: (optional) Authenticate against GitHub package registry
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
     - name: Publishing...
       run: |
         npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
         npm publish "package/data-lib-1.0.0.tgz"
       env:
         CI: true
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
