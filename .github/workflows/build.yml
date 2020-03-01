@@ -22,6 +22,8 @@ jobs:
       with: 
         name: package
         path: ./package
+    - name: (optional) Authenticate against GitHub package registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
     - name: Publishing...
       run: |
         npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
