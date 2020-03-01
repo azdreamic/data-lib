@@ -6,13 +6,13 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "test": "jest",
-    "create-pack":"node ./build/createpack.js"
+    "create-pack":"node ./build/createpack.js",
+    "publish":"node ./build/publish.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SridharSathaSivam/data-lib.git"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "keywords": [
     "typescript",
     "javascript",
