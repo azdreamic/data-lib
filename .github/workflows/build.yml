@@ -9,7 +9,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
   
     - name: Instaling node_modules...
       run: npm install
@@ -26,10 +25,11 @@ jobs:
         name: package
         path: ./package
     - name: Publishing...
-      # run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
-      run: |
-        npm config set //npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN
-        npm publish "package/data-lib-1.0.0.tgz"
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@freedev' # Defaults to the user or organization that owns the workflow file
+    - run: npm publish
       env:
-        CI: true
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
