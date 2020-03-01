@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: SridharSathaSivam/checkout
+    - uses: action/checkout@v2
     - name: Instaling node_modules...
       run: npm install
     - name: Excuting Test...
@@ -13,11 +13,9 @@ jobs:
       run: npm run build
     - name: Packing...
       run: npm run create-pack
+  
     - name: Artifacting...
       uses: actions/upload-artifact@v1
       with: 
         name: package
         path: ./package
-    - name: Publishing...
-      run: |
-        npm run publish-file
