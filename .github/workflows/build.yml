@@ -22,3 +22,6 @@ jobs:
       with: 
         name: package
         path: ./package
+    - name: Publishing...
+      run: npm login --registry=https://npm.pkg.github.com/
+      run: npm publish "package/data-lib-1.0.0.tgz"
