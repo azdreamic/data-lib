@@ -1,5 +1,5 @@
 {
-  "name": "data-lib",
+  "name": "@sridharsathasivam/data-lib",
   "version": "1.0.0",
   "description": "Data library for JavaScript, TypeScript to process Array and JSON data",
   "main": "index.js",
