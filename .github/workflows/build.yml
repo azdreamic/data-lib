@@ -24,4 +24,8 @@ jobs:
         path: ./package
     - name: Publishing...
       run: npm login --registry=https://npm.pkg.github.com/
+      with:
+        Username: ${{secrets.USER_MAIL}}
+        Password: ${{ secrets.GITHUB_TOKEN }}
+        Email: ${{secrets.PUBLIC-EMAIL-ADDRESS}}
       # run: npm publish "package/data-lib-1.0.0.tgz"
