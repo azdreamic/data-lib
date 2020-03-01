@@ -23,12 +23,9 @@ jobs:
         name: package
         path: ./package
     - name: Publishing...
-      run: npm publish
+      run: |
+        npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+        npm publish "package/data-lib-1.0.0.tgz"
       env:
-#          NODE_AUTH_TOKEN: ${{secrets.GPR_TOKEN}}
-         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
-      # with:
-      #   Username: ${{secrets.USER_MAIL}}
-      #   Password: ${{ secrets.GITHUB_TOKEN }}
-      #   Email: ${{secrets.PUBLIC-EMAIL-ADDRESS}}
-      # run: npm publish "package/data-lib-1.0.0.tgz"
+        CI: true
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
