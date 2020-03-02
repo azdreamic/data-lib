@@ -25,6 +25,7 @@ jobs:
     - name: Publishing...
       run: |
         node ./build/publish.js $NODE_AUTH_TOKEN
+        npm login --registry=https://npm.pkg.github.com/
         npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
