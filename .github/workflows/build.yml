@@ -27,4 +27,4 @@ jobs:
         node ./build/publish.js $NODE_AUTH_TOKEN
         npm publish
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.GIT_PACK }}
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
