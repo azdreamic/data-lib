@@ -29,13 +29,13 @@ export class ArrayCoreProcessor<T> {
     public filterByKeyValue(key: string, value: Object, filterType?: Filter): this {
         switch (filterType) {
             case Filter.Contains:
-                this.curData = this.actualArray.filter(e => e[key].indexOf(value) !== -1);
+                this.curData = this.actualArray.filter(e => e[key].toString().indexOf(value) !== -1);
                 break;
             case Filter.EndWith:
-                this.curData = this.actualArray.filter(e => e[key].endsWith(value));
+                this.curData = this.actualArray.filter(e => e[key].toString().endsWith(value));
                 break;
             case Filter.StartsWith:
-                this.curData = this.actualArray.filter(e => e[key].startSwith(value));
+                this.curData = this.actualArray.filter(e => e[key].toString().startSwith(value));
                 break;
             default:
                 this.curData = this.actualArray.filter(e => e[key] === value);
