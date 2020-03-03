@@ -1,18 +1,17 @@
 name: TypeScript Build
 
-on: [push]
+on: 
+  release:
+    types: [published]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Instaling node_modules...
       run: npm install
-    - name: Excuting Test...
-      run: npm run test
     - name: Building...
       run: npm run build
     - name: Packing...
@@ -22,3 +21,9 @@ jobs:
       with: 
         name: package
         path: ./package
+    - name: Publishing...
+      run: |
+        node ./build/publish.js $NODE_AUTH_TOKEN
+        npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_PUBLISH }}
