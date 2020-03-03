@@ -1,4 +1,4 @@
-name: TypeScript Build
+name: Release Build
 
 on: 
   release:
@@ -16,11 +16,6 @@ jobs:
       run: npm run build
     - name: Packing...
       run: npm run create-pack
-    - name: Artifacting...
-      uses: actions/upload-artifact@v1
-      with: 
-        name: package
-        path: ./package
     - name: Publishing...
       run: |
         node ./build/publish.js $NODE_AUTH_TOKEN
