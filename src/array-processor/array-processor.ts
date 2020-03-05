@@ -26,19 +26,19 @@ export class ArrayCoreProcessor<T> {
      * @param key - Key as string in object model.
      * @param value - Value Object to compare.
      */
-    public filterByKeyValue(key: string, value: Object, filterType?: Filter): this {
+    public filterByKeyValue(key: string, value: TObject, filterType?: Filter): this {
         switch (filterType) {
             case Filter.Contains:
-                this.curData = this.actualArray.filter(e => e[key].toString().indexOf(value) !== -1);
+                this.curData = this.curData.filter(e => e[key].toString().indexOf(value) !== -1);
                 break;
             case Filter.EndWith:
-                this.curData = this.actualArray.filter(e => e[key].toString().endsWith(value));
+                this.curData = this.curData.filter(e => e[key].toString().endsWith(value));
                 break;
             case Filter.StartsWith:
-                this.curData = this.actualArray.filter(e => e[key].toString().startSwith(value));
+                this.curData = this.curData.filter(e => e[key].toString().startsWith(value));
                 break;
             default:
-                this.curData = this.actualArray.filter(e => e[key] === value);
+                this.curData = this.curData.filter(e => e[key] === value);
                 break;
         }
         return this;
@@ -49,7 +49,7 @@ export class ArrayCoreProcessor<T> {
      * @param key - Key as string in object model.
      */
     public filterHasKey(key: string): this {
-        this.curData = this.actualArray.filter(e => e.hasOwnProperty(key));
+        this.curData = this.curData.filter(e => e.hasOwnProperty(key));
         return this;
     }
 
@@ -59,9 +59,13 @@ export class ArrayCoreProcessor<T> {
      * @param value - Value Object to compare.
      * @param obj - Merging object
      */
-    public mergeByKeyValue(key: string, value: object, obj: T): this {
-        const val = this.filterByKeyValue(key, value)[0];
-        Object.assign(val, obj);
+    public mergeByKeyValue(key: string, value: TObject, obj: T): this {
+        const copyArray = this.curData;
+        const val = this.filterByKeyValue(key, value).getFirstObject();
+        if (val !== undefined) {
+            Object.assign(val, obj);
+        }
+        this.curData = copyArray;
         return this;
     }
 
@@ -123,7 +127,7 @@ export class ArrayCoreProcessor<T> {
      * @param key- as string
      * @param key- as comparing value
      */
-    getIndexByKeyValue(key: string, value: object): number {
+    getIndexByKeyValue(key: string, value: TObject): number {
         let index = -1;
         this.forEach((e, idx) => {
             if (e[key] === value) {
@@ -149,7 +153,7 @@ export class ArrayCoreProcessor<T> {
      * @param key - key as string
      * @param value - Compare value as object
      */
-    deleteItemByKeyValue(key: string, value: object) {
+    deleteItemByKeyValue(key: string, value: TObject) {
         const index = this.getIndexByKeyValue(key, value);
         this.curData = this.curData.splice(index);
         return this;
@@ -282,6 +286,8 @@ export class ArrayCoreProcessor<T> {
 
 
 }
+
+type TObject = number | string | boolean | object | Date;
 
 export enum Order {
     Ascending,
