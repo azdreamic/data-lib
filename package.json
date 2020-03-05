@@ -1,6 +1,6 @@
 {
   "name": "@azdreamic/data-lib",
-  "version": "0.0.1-alpha",
+  "version": "0.0.2-alpha",
   "description": "Data library for JavaScript, TypeScript to process Array and JSON data",
   "main": "index.js",
   "scripts": {
