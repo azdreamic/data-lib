@@ -85,6 +85,37 @@ describe('Array Processor', function () {
         expect(result.get()).toEqual(arr2);
     });
 
+    it('forEach each value', function () {
+        const arr = [{ key: 1, value: '1246' }, { key: 2, value: '672' }, { map: 3, value: 3 }, { map: 2, value: 2 }];
+        const arr2 = [];
+        let result = ArrayProcessor<any>(arr).forEach((val, number) => {
+            arr2.push(val);
+        });
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('forEach each index', function () {
+        const arr = [{ key: 1, value: '1246' }, { key: 2, value: '672' }, { map: 3, value: 3 }, { map: 2, value: 2 }];
+        const arr2 = [];
+        let result = ArrayProcessor<any>(arr).forEach((val, number) => {
+            arr2.push(number);
+        });
+        expect(arr2).toEqual([0, 1, 2, 3]);
+    });
+
+    it('forEach each value return', function () {
+        const arr = [{ key: 1, value: '1246' }, { key: 2, value: '672' }, { key: 3, value: 3 }, { key: 2, value: 2 }];
+        const arr2 = [];
+        let result = ArrayProcessor(arr).forEach((val, number) => {
+            if (arr2.indexOf(val.key) === -1) {
+                arr2.push(val.key);
+            } else {
+                return;
+            }
+        });
+        expect(arr2).toEqual([1, 2, 3]);
+    });
+
     it('getFirstObject method', function () {
         const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
         const arr2 = { key: 2, value: 2 }

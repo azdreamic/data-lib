@@ -73,11 +73,11 @@ export class ArrayCoreProcessor<T> {
      * Loop the array
      * @param reviver - function called on each item
      */
-    public forEach(reviver: (value: T, index) => void | boolean): this {
+    public forEach(reviver: (value: T, index: number) => void | boolean): this {
         let idx = 0;
         for (const item of this.curData) {
             const rtn = reviver(item, idx);
-            if (rtn === false) {
+            if (rtn === true) {
                 break;
                 return this;
             }
@@ -189,7 +189,7 @@ export class ArrayCoreProcessor<T> {
      * Perform array action
      * @param reviver - function to process array function
      */
-    public process(reviver: (value: T[], instance?: this) => void): this {
+    public process(reviver: (array: T[], instance?: this) => void): this {
         reviver(this.curData, this);
         return this;
     }
