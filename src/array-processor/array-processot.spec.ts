@@ -225,7 +225,7 @@ describe('Array Processor', function () {
     it('sortByKey method Decending', function () {
         const arr = [{ key: 3, value: 3 }, { key: 1, value: 1 }, { key: 2, value: 2 },];
         const arr2 = [{ key: 3, value: 3 }, { key: 2, value: 2 }, { key: 1, value: 1 }];
-        let result = ArrayProcessor<any>(arr).sortByKey('key', Order.Descending);
+        let result = ArrayProcessor<any>(arr).sortByKey('key', { order: Order.Descending });
         expect(result.get()).toEqual(arr2);
     });
 

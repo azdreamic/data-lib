@@ -220,8 +220,8 @@ export class ArrayCoreProcessor<T> {
      * @param key - Keys as string
      * @param order - Ascending | Descending Order
      */
-    public sortByKey(key: string, order: Order = Order.Ascending): this {
-        this.curData = this.curData.sort(this.simpleSort(key, order));
+    public sortByKey(key: string, sortSetting = { order: Order.Ascending }): this {
+        this.curData = this.curData.sort(this.simpleSort(key, sortSetting.order));
         return this;
     }
 
