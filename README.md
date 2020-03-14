@@ -36,8 +36,8 @@ result.get();
 
 ## Documentation
 
-[Guide Documentation](https://sridharsathasivam.github.io/data-lib/)
-[Api Documentation](https://sridharsathasivam.github.io/data-lib/api)
+- [Guide Documentation](https://sridharsathasivam.github.io/data-lib/)
+- [Api Documentation](https://sridharsathasivam.github.io/data-lib/api)
 
 ## License
 
