@@ -21,4 +21,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with: 
         name: package
-        path: ./package
+        path: ./azdreamic-data-lib-0.0.3-alpha.tgz
