@@ -15,10 +15,9 @@ jobs:
     - name: Building...
       run: npm run build
     - name: Packing...
-      run: npm run create-pack
+      run: node ./build/createpack.js ${GITHUB_REF/refs\/tags\//}
     - name: Publishing...
       run: |
-        node ./build/publish.js $NODE_AUTH_TOKEN
-        npm publish azdreamic-data-lib-0.0.3-beta.tgz
+        node ./build/publish.js $NODE_AUTH_TOKEN ${GITHUB_REF/refs\/tags\//}
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_PUBLISH }}

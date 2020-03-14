@@ -5,6 +5,12 @@ const path = require('path');
 const pkgJSON = require('../package.json');
 const exec = require('child_process').exec;
 
+var myArgs = process.argv.slice(2);
+
+pkgJSON.version = myArgs[0];
+
+fs.writeFileSync('./package.json', JSON.stringify(pkgJSON));
+
 config.copyFilesForPack.forEach((e, i) => {
     glob(e, {}, function (er, files) {
         files.forEach((v, idx) => {
