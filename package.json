@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "test": "jest",
+    "api-doc":"typedoc --out docs/api src",
     "create-pack": "node ./build/createpack.js",
     "publish-file": "node ./build/publish.js"
   },
@@ -31,6 +32,7 @@
     "glob": "^7.1.6",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.1",
+    "typedoc": "^0.16.11",
     "typescript": "^3.8.2"
   }
 }
