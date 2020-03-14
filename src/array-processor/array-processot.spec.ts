@@ -1,4 +1,4 @@
-import { ArrayProcessor, Filter } from './array-processor';
+import { ArrayProcessor, Filter, Order } from './array-processor';
 
 describe('Array Processor', function () {
 
@@ -116,11 +116,151 @@ describe('Array Processor', function () {
         expect(arr2).toEqual([1, 2, 3]);
     });
 
-    it('getFirstObject method', function () {
+    it('transformModelByKeys method', function () {
         const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
-        const arr2 = { key: 2, value: 2 }
-        let result = ArrayProcessor<any>(arr).filterByKeyValue('key', 2);
-        expect(result.getFirstObject()).toEqual(arr2);
+        const arr2 = [{ id: 1, value: 1 }, { id: 2, value: 2 }, { id: 3, value: 3 }];
+        let result = ArrayProcessor<any>(arr).transformModelByKeys({ key: 'id' });
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('map method with object', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [{ key: 101 }, { key: 102 }, { key: 103 }];
+        let result = ArrayProcessor<any>(arr).map((value, i) => {
+            return { key: value.key + 100 };
+        });
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('map method with number', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [101, 102, 103];
+        let result = ArrayProcessor<any>(arr).map((value, i) => {
+            return value.key + 100;
+        });
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('getIndexByKeyValue method with number', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [101, 102, 103];
+        let result = ArrayProcessor<any>(arr).getIndexByKeyValue('key', 2);
+        expect(result).toEqual(1);
+    });
+
+    it('getIndexByKeyValue method with number', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [101, 102, 103];
+        let result = ArrayProcessor<any>(arr).getIndexByKeyValue('key2', 2);
+        expect(result).toEqual(-1);
+    });
+
+    it('deleteItemByIndex method', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [{ key: 1, value: 1 }, { key: 3, value: 3 }];
+        let result = ArrayProcessor<any>(arr).deleteItemByIndex(1);
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('deleteItemByKeyValue method', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [{ key: 1, value: 1 }, { key: 2, value: 2 }];
+        let result = ArrayProcessor<any>(arr).deleteItemByKeyValue('key', 3);
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('insertItem method at last', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }, { key: 4, value: 4 }];
+        let result = ArrayProcessor<any>(arr).insertItem({ key: 4, value: 4 });
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('insertItem method at index', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [{ key: 0, value: 0 }, { key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        let result = ArrayProcessor<any>(arr).insertItem({ key: 0, value: 0 }, 0);
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('insertItems method at last', function () {
+        const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }];
+        const arr2 = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }, { key: 4, value: 4 }];
+        let result = ArrayProcessor<any>(arr).insertItems([{ key: 3, value: 3 }, { key: 4, value: 4 }]);
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('insertItems method at index', function () {
+        const arr = [{ key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [{ key: 0, value: 0 }, { key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        let result = ArrayProcessor<any>(arr).insertItems([{ key: 0, value: 0 }, { key: 1, value: 1 }], 0);
+        expect(result.get()).toEqual(arr2);
+    });
+
+
+    it('process method', function () {
+        const arr = [{ key: 2, value: 2 }, { key: 3, value: 3 }];
+        const arr2 = [{}, {}];
+        let result = ArrayProcessor<any>(arr).process((ar) => {
+            return [{}, {}];
+        });
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('getActualArray method', function () {
+        const arr = [{ key: 2, value: 2 }, { key: 3, value: 3 }];
+        let result = ArrayProcessor<any>(arr).process((ar) => {
+            return [{}, {}];
+        });
+        expect(result.getActualArray()).toEqual(arr);
+    });
+
+    it('sortByKey method Ascending', function () {
+        const arr = [{ key: 3, value: 3 }, { key: 1, value: 1 }, { key: 2, value: 2 },];
+        const arr2 = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+        let result = ArrayProcessor<any>(arr).sortByKey('key');
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('sortByKey method Decending', function () {
+        const arr = [{ key: 3, value: 3 }, { key: 1, value: 1 }, { key: 2, value: 2 },];
+        const arr2 = [{ key: 3, value: 3 }, { key: 2, value: 2 }, { key: 1, value: 1 }];
+        let result = ArrayProcessor<any>(arr).sortByKey('key', Order.Descending);
+        expect(result.get()).toEqual(arr2);
+    });
+
+    it('operateByKey method +', function () {
+        const arr = [{ key: 3, value: 3 }, { key: 1, value: 1 }, { key: 2, value: 2 },];
+        let result = ArrayProcessor<any>(arr).operateByKey('key', '+');
+        expect(result).toEqual(6);
+    });
+
+    it('operateByKey method *', function () {
+        const arr = [{ key: 3, value: 3 }, { key: 2, value: 1 }, { key: 2, value: 2 },];
+        let result = ArrayProcessor<any>(arr).operateByKey('key', '*');
+        expect(result).toEqual(12);
+    });
+
+    it('operateByKey method -', function () {
+        const arr = [{ key: 3, value: 3 }, { key: 2, value: 1 }, { key: 2, value: 2 },];
+        let result = ArrayProcessor<any>(arr).operateByKey('key', '-');
+        expect(result).toEqual(-1);
+    });
+
+    it('operateByKey method /', function () {
+        const arr = [{ key: 3, value: 3 }, { key: 2, value: 1 }, { key: 2, value: 2 },];
+        let result = ArrayProcessor<any>(arr).operateByKey('key', '/');
+        expect(result).toEqual(0.75);
+    });
+
+    it('groupBy method /', function () {
+        const arr = [{ key: 3, value: 3 }, { key: 2, value: 1 }, { key: 2, value: 2 },];
+        const arr2 = [
+            [{ key: 3, value: 3 }],
+            [{ key: 2, value: 1 }, { key: 2, value: 2 }]
+        ];
+        let result = ArrayProcessor<any>(arr).groupBy(e => e.key);
+        expect(result).toEqual(arr2);
     });
 
     it('getFirstObject method', function () {

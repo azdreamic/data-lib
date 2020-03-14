@@ -93,9 +93,10 @@ export class ArrayCoreProcessor<T> {
     public transformModelByKeys(fieldMap: { [key: string]: string }): this {
         for (const item of this.curData) {
             for (const key in item) {
-                if (item.hasOwnProperty(key)) {
+                const mapKey = fieldMap[key];
+                if (item.hasOwnProperty(key) && mapKey !== undefined) {
                     const value = item[key];
-                    item[fieldMap[key]] = value;
+                    item[mapKey] = value;
                     delete item[key];
                 }
             }
@@ -110,13 +111,17 @@ export class ArrayCoreProcessor<T> {
     public map<G>(reviver: (value: T, index) => G): this {
         let idx = 0;
         for (const item of this.curData) {
-            const v = Object.assign({}, reviver(item, idx));
-            for (const key in item) {
-                if (item.hasOwnProperty(key)) {
-                    delete item[key];
+            const v = reviver(Object.assign({}, item), idx);
+            if (typeof v === 'object') {
+                for (const key in item) {
+                    if (item.hasOwnProperty(key)) {
+                        delete item[key];
+                    }
                 }
+                Object.assign(item, v);
+            } else {
+                this.curData[idx] = v as any;
             }
-            Object.assign(item, v);
             idx = idx + 1;
         }
         return this;
@@ -144,7 +149,7 @@ export class ArrayCoreProcessor<T> {
      * @param count - Optional number of items
      */
     deleteItemByIndex(index: number = this.curData.length - 1, count = 1): this {
-        this.curData = this.curData.splice(index, count);
+        this.curData.splice(index, count);
         return this;
     }
 
@@ -155,7 +160,7 @@ export class ArrayCoreProcessor<T> {
      */
     deleteItemByKeyValue(key: string, value: TObject) {
         const index = this.getIndexByKeyValue(key, value);
-        this.curData = this.curData.splice(index);
+        this.curData.splice(index);
         return this;
     }
 
@@ -168,8 +173,9 @@ export class ArrayCoreProcessor<T> {
         if (typeof index === 'undefined') {
             this.curData.push(value);
         } else {
-            this.curData = this.curData.splice(index, 0, value);
+            this.curData.splice(index, 0, value);
         }
+        return this;
     }
 
     /**
@@ -181,16 +187,17 @@ export class ArrayCoreProcessor<T> {
         if (typeof index === 'undefined') {
             this.curData = this.curData.concat(value);
         } else {
-            this.curData = this.curData.splice(index, 0, ...value);
+            this.curData.splice(index, 0, ...value);
         }
+        return this;
     }
 
     /**
      * Perform array action
      * @param reviver - function to process array function
      */
-    public process(reviver: (array: T[], instance?: this) => void): this {
-        reviver(this.curData, this);
+    public process(reviver: (array: T[], instance?: this) => T[]): this {
+        this.curData = reviver(this.curData, this);
         return this;
     }
 
@@ -214,9 +221,7 @@ export class ArrayCoreProcessor<T> {
      * @param order - Ascending | Descending Order
      */
     public sortByKey(key: string, order: Order = Order.Ascending): this {
-
-        this.curData.sort(this.simpleSort(key, order));
-
+        this.curData = this.curData.sort(this.simpleSort(key, order));
         return this;
     }
 
@@ -225,11 +230,9 @@ export class ArrayCoreProcessor<T> {
      */
     private simpleSort(key: string, order: Order): any {
         return (obj1: object, obj2: object) => {
-            if (order === Order.Descending) {
-                return obj2[key].localeCompare(obj1[key]);
-            } else {
-                return obj1[key].localeCompare(obj2[key]);
-            }
+            if (!obj1.hasOwnProperty(key) || !obj2.hasOwnProperty(key)) return 0;
+            const comparison = ('' + obj1[key]).localeCompare('' + obj2[key]);
+            return (order === Order.Descending ? comparison * -1 : comparison);
         };
     }
 
@@ -239,8 +242,12 @@ export class ArrayCoreProcessor<T> {
      * @param op - Operator Identity
      */
     public operateByKey(key: string, op: '*' | '+' | '-' | '/'): number {
-        let result = 0;
-        this.forEach((e) => {
+        let result;
+        this.forEach((e, index) => {
+            if (index === 0) {
+                result = e[key];
+                return;
+            }
             switch (op) {
                 case '+':
                     result = result + e[key];
