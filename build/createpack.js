@@ -9,7 +9,7 @@ var myArgs = process.argv.slice(2);
 
 pkgJSON.version = myArgs[0];
 
-console.log(version + myArgs[0])
+console.log('version' + myArgs[0])
 
 fs.writeFileSync('./package.json', JSON.stringify(pkgJSON));
 
