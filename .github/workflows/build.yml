@@ -22,7 +22,7 @@ jobs:
       with: 
         name: package
         path: ./package
-       - name: Publishing...
+    - name: Publishing...
       run: |
         node ./build/publish.js $NODE_AUTH_TOKEN "v0.0.4-beta"
       env:
