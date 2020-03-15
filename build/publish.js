@@ -3,24 +3,19 @@ const exec = require('child_process').exec;
 const pkgJSON = require('../package.json');
 
 
-var myArgs = process.argv.slice(2);
+const myArgs = process.argv.slice(2);
+
+console.log('Writing registry...')
 
 fs.writeFileSync('.npmrc', '//registry.npmjs.org/:_authToken=' + myArgs[0]);
 
-const fileName = `${pkgJSON.name}-${pkgJSON.version}.tgz`;
+const version = myArgs[0].replace('v', '');
+const packageName = 'azdreamic-data-lib';
+const fileName = `${packageName}-${version}.tgz`;
 
-console.log(fileName);
+console.log('Publishing started...');
 
 exec('npm publish ./' + fileName, (e) => {
+    console.log('Publishing Result...');
     console.log(e);
-    // const pkgPath = path.resolve('./' + fileName);
-    // if (!fs.existsSync('./package')) {
-    //     fs.mkdirSync('./package');
-    //     console.log('package folder created!')
-    // }
-    // if (fs.existsSync(pkgPath)) {
-    //     fs.copyFileSync(pkgPath, './package/' + fileName);
-    //     console.log('------------------------------------------------------------')
-    //     console.log('Your package is created!' + fileName + '.tgz')
-    // }
 });
