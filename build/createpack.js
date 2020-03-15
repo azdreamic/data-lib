@@ -28,9 +28,10 @@ config.copyFilesForPack.forEach((e, i) => {
 });
 
 const version = pkgJSON.version;
+const packageName = pkgJSON.name.replace('\\',"\\\\");
 // exec('cd ./output')
-exec('npm pack ./output', () => {
-    const fileName = `${pkgJSON.name}-${pkgJSON.version}.tgz`;
+exec('npm pack ./output ', () => {
+    const fileName = `${packageName}-${pkgJSON.version}.tgz`;
     const pkgPath = path.resolve('./' + fileName);
     if (!fs.existsSync('./package')) {
         fs.mkdirSync('./package');
