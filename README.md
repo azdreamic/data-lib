@@ -1,7 +1,7 @@
 # Data Processor Library For TypeScript
 
-![Release](https://github.com/SridharSathaSivam/data-lib/workflows/Release%20Build/badge.svg)
-![Build](https://github.com/SridharSathaSivam/data-lib/workflows/Development%20Build/badge.svg)
+![Release](https://github.com/azdreamic/data-lib/workflows/Release%20Build/badge.svg)
+![Build](https://github.com/azdreamic/data-lib/workflows/Development%20Build/badge.svg)
 
 This library is purpose of do array / object operation like merge, clone, loop and some other processes. We always confuse to choose the best practices, performance and maintaining the common source from deferent developers.
 
