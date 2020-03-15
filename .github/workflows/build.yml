@@ -16,9 +16,9 @@ jobs:
     - name: Building...
       run: npm run build
     - name: Packing...
-      run: npm run create-pack "v0.0.4-beta"
+      run: node ./build/createpack.js "*"
     - name: Artifacts...
       uses: actions/upload-artifact@v1
       with: 
         name: package
-        path: ./
+        path: ./package

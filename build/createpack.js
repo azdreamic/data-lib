@@ -6,10 +6,12 @@ const pkgJSON = require('../package.json');
 const exec = require('child_process').exec;
 
 var myArgs = process.argv.slice(2);
+const version = myArgs[0].replace('v', '');
+const packageName = 'azdreamic-data-lib';
 
-pkgJSON.version = myArgs[0];
+pkgJSON.version = version;
 
-console.log('version' + myArgs[0])
+console.log('version' + version)
 
 fs.writeFileSync('./package.json', JSON.stringify(pkgJSON));
 
@@ -27,8 +29,6 @@ config.copyFilesForPack.forEach((e, i) => {
     });
 });
 
-const version = pkgJSON.version;
-const packageName = pkgJSON.name.replace('\\',"\\\\");
 // exec('cd ./output')
 exec('npm pack ./output ', (e) => {
     console.log(e);
@@ -41,7 +41,7 @@ exec('npm pack ./output ', (e) => {
     if (fs.existsSync(pkgPath)) {
         fs.copyFileSync(pkgPath, './package/' + fileName);
         console.log('------------------------------------------------------------')
-        console.log('Your package is created!' + fileName + '.tgz')
+        console.log('Your package is created!' + fileName)
     }
 });
 
