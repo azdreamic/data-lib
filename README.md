@@ -29,10 +29,14 @@ npm install @azdreamic/data-lib --save
 import { ArrayProcessor } from '@azdreamic/data-lib';
 
 const arr = [{ key: 1, value: 1 }, { key: 2, value: 2 }, { key: 3, value: 3 }];
+
 let result = ArrayProcessor<{key:number,value:number}>(arr).filterByKeyValue('key', 2);
+
 result.get();
 
 ```
+
+[StackBlitz Sample](https://stackblitz.com/edit/angular-xtzbrd)
 
 ## Documentation
 
