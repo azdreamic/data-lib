@@ -9,7 +9,7 @@ console.log('Writing registry...')
 
 fs.writeFileSync('.npmrc', '//registry.npmjs.org/:_authToken=' + myArgs[0]);
 
-const version = myArgs[0].replace('v', '');
+const version = myArgs[1].replace('v', '');
 const packageName = 'azdreamic-data-lib';
 const fileName = `${packageName}-${version}.tgz`;
 
