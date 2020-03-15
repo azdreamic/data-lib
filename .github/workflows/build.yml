@@ -21,10 +21,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with: 
         name: package
-        path: ./package
-    - name: Publishing...
-      run: |
-        node ./build/publish.js $NODE_AUTH_TOKEN "v0.0.4-beta"
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_PUBLISH }}
-
+        path: ./
