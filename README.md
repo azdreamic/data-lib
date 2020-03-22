@@ -3,7 +3,7 @@
 ![Release](https://github.com/azdreamic/data-lib/workflows/Release%20Build/badge.svg)
 ![Build](https://github.com/azdreamic/data-lib/workflows/Development%20Build/badge.svg)
 
-This library is purpose of do array / object operation like merge, clone, loop and some other processes. We always confuse to choose the best practices, performance and maintaining the common source from deferent developers.
+This library is purpose of do array / object operation like merge, clone, loop and some other processes. We always confuse to choose the best practices, performance and maintaining the common source from different  developers.
 
 This is very simple library written in typescript to resolve those conflicts. Since, it is written in typescript & npm combo will gave you extra feature like we can use it in typescript, javascript, angular, react and vuejs applications.
 
@@ -19,9 +19,9 @@ npm install @azdreamic/data-lib --save
 
 ## Features
 
-- Chaining / Pipes the process array fluently.
+- Chains/pipes the process array fluently.
 - TypeScript Supported
-- Can use it various platforms( TypeScript, JavaScript, Angular, React and VueJS )
+- Can use it in various platforms( TypeScript, JavaScript, Angular, React and VueJS )
 
 ## Sample Snippet to Use
 
@@ -40,8 +40,8 @@ result.get();
 
 ## Documentation
 
-- [Guide Documentation](https://sridharsathasivam.github.io/data-lib/)
-- [Api Documentation](https://sridharsathasivam.github.io/data-lib/api)
+- [Guide Documentation](https://azdreamic.github.io/data-lib/)
+- [Api Documentation](https://azdreamic.github.io/data-lib/api)
 
 ## License
 
